@@ -5,7 +5,6 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
-
         SDL_Window *window;                    // Declare a pointer
 
         SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
@@ -28,7 +27,6 @@ int main(int argc, char* argv[]) {
         }
 
         // The window is open: enter program loop (see SDL_PollEvent)
-
         SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
         // Close and destroy the window
