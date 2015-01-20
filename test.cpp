@@ -30,12 +30,13 @@ int main(int argc, char* argv[]) {
 
 		SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED);
 
-		std::shared_ptr<Level> level = std::make_shared<Level>(Level());
+		std::shared_ptr<Level> level(new Level());
 		level->init();
-		while (true) {
+		bool keepRunning = true;
+		while (keepRunning) {
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			SDL_RenderClear(renderer);
-			level->execute();
+			keepRunning = level->execute();
 			level->getPlayer()->draw(renderer);
 			SDL_RenderPresent(renderer);
 		}

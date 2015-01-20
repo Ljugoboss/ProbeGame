@@ -1,18 +1,23 @@
 #include "level.h"
 
-void Level::execute() {
-	 read();
+bool Level::execute() {
+	 if(!read()) {
+		 return false;
+	 }
 	 for (auto const &it : actors) {
 		 it.second->act();
 	 }
 
 	 std::this_thread::sleep_for(std::chrono::milliseconds(1000 / FPS));
+	 return true;
  }
 
-void Level::read() {
+bool Level::read() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)){
 		switch (event.type){
+		case SDL_QUIT:
+			return false;
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym){
 			case SDLK_LEFT:
@@ -61,6 +66,7 @@ void Level::read() {
 			break;
 		}
 	}
+	return true;
 }
 
 std::shared_ptr<Actor> Level::getPlayer() {

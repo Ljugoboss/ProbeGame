@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -g
 SDLFLAGS=`sdl-config --cflags --libs` -framework SDL2 -framework Cocoa
-SOURCES=test.cpp
+SOURCES= movable.cpp actor.cpp level.cpp player.cpp test.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=ProbeGame.exe
 
