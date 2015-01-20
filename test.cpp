@@ -3,9 +3,10 @@
 
 #include "sdl/SDL.h"
 #include <stdio.h>
+#include <string>
+#include "level.h"
 
 int main(int argc, char* argv[]) {
-
         SDL_Window *window;                    // Declare a pointer
 
         SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
@@ -27,9 +28,22 @@ int main(int argc, char* argv[]) {
                 return 1;
         }
 
-        // The window is open: enter program loop (see SDL_PollEvent)
+		SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED);
 
-        SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+		std::shared_ptr<Level> level = std::make_shared<Level>(Level());
+		level->init();
+		while (true) {
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			SDL_RenderClear(renderer);
+			level->execute();
+			level->getPlayer()->draw(renderer);
+			SDL_RenderPresent(renderer);
+		}
+
+
+
+        // The window is open: enter program loop (see SDL_PollEvent)
+        //SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
         // Close and destroy the window
         SDL_DestroyWindow(window);
