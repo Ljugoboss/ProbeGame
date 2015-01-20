@@ -1,65 +1,36 @@
 #include <memory>
 #include <chrono>
 #include <thread>
+#include <map>
 #include "sdl/SDL.h"
+#include "actor.h"
+#include "player.h"
 
 #ifndef LEVEL_H
 #define LEVEL_H
 
-class Level {
+class Level : public std::enable_shared_from_this<Level> {
 private:
 	std::map<int, std::shared_ptr<Actor>> actors;
-	std::weak_ptr<Player> main_character;
+	std::weak_ptr<Actor> main_character;
 public:
-	Level() {}
+	int FPS;
 
-	void execute() {
-		read();
-		for (auto const &it1 : actors) {
-			for (auto const &it2 : it1.second) {
-				it2->act();
-			}
-		}
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	Level() { 
+		FPS = 120;
 	}
 
-	void read() {
-		while (SDL_PollEvent(&event)){
-			switch (event.type){
-				case SDL_KEYDOWN:
-					switch (event.key.keysym.sym){
-						case SDLK_LEFT:
-							break;
-						case SDLK_RIGHT:
-							break;
-						case SDLK_UP:
-							break;
-						case SDLK_DOWN:
-							break;
-						default:
-							break;
-					}
-					break;
-				case SDL_KEYUP:
-					switch (event.key.keysym.sym){
-						case SDLK_LEFT:
-							break;
-						case SDLK_RIGHT:
-							break;
-						case SDLK_UP:
-							break;
-						case SDLK_DOWN:
-							break;
-						default:
-							break;
-					}
-					break;
-				default:
-					break;
-			}
-		}
+	void init() {
+		std::shared_ptr<Actor> player = std::make_shared<Player>(Player(50, 50, shared_from_this()));
+		actors[0] = player;
+		main_character = player;
 	}
+
+	void execute();
+
+	void read();
+
+	std::shared_ptr<Actor> getPlayer();
 };
 
 #endif

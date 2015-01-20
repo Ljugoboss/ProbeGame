@@ -6,10 +6,8 @@
 class Character : public Actor {
 private:
 public:
-	Character() {
+	Character(int x, int y, std::shared_ptr<Level> l) : Actor(x, y, l) {
 	}
-
-	virtual void action() {}
 };
 
 #endif
