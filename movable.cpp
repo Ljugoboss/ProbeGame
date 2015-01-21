@@ -38,7 +38,6 @@ void Movable::accelerate() {
 		}
 	}
 
-	std::cout << getMaxSpeed() << std::endl;
 	velx += getAccX() * movingX;
 	vely += getAccY() * movingY;
 
@@ -53,48 +52,72 @@ void Movable::accelerate() {
 double Movable::getX() const {
 	return x;
 }
-
 double Movable::getY() const {
 	return y;
 }
 
+void Movable::setX(double value) {
+	x = value;
+}
+void Movable::setY(double value) {
+	y = value;
+}
+
 double Movable::getMaxSpeed() const {
-	return max_speed / get_level()->FPS;
+	return max_speed / getLevel()->FPS;
 }
 
 double Movable::getAccX() const {
-	return accx / get_level()->FPS;
+	return accx / getLevel()->FPS;
 }
 double Movable::getAccY() const {
-	return accy / get_level()->FPS;
+	return accy / getLevel()->FPS;
 }
 
 double Movable::getDeaccX() const {
-	return de_accx / get_level()->FPS;
+	return de_accx / getLevel()->FPS;
 }
 double Movable::getDeaccY() const {
-	return de_accy / get_level()->FPS;
+	return de_accy / getLevel()->FPS;
 }
 
 void Movable::setMovingX(int value) {
 	movingX = value;
+	if (movingX < -1) {
+		movingX = -1;
+	} else if (movingX > 1) {
+		movingX = 1;
+	}
 }
 
 void Movable::setMovingY(int value) {
 	movingY = value;
+	if (movingY < -1) {
+		movingY = -1;
+	} else if (movingY > 1) {
+		movingY = 1;
+	}
 }
 
-int Movable::getMovingX() {
+int Movable::getRotation() const {
+	return rotation;
+}
+
+void Movable::setRotation(int value) {
+	rotation = value;
+}
+
+int Movable::getMovingX() const {
 	return movingX;
 }
-int Movable::getMovingY() {
+int Movable::getMovingY() const {
 	return movingY;
 }
 
-const std::shared_ptr<Level> Movable::get_level() const {
+const std::shared_ptr<Level> Movable::getLevel() const {
 	return level.lock();
 }
 
-std::shared_ptr<Level> Movable::get_level() {
+std::shared_ptr<Level> Movable::getLevel() {
 	return level.lock();
 }

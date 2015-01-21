@@ -1,12 +1,18 @@
 // Example program:
 // Using SDL2 to create an application window
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
 #include "sdl/SDL.h"
 #include <stdio.h>
 #include <string>
+#include <memory>
 #include "level.h"
 
 int main(int argc, char* argv[]) {
+		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
         SDL_Window *window;                    // Declare a pointer
 
         SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
@@ -29,14 +35,16 @@ int main(int argc, char* argv[]) {
         }
 
 		SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED);
+		SDL_Surface* surface = SDL_GetWindowSurface(window);
 
-		std::shared_ptr<Level> level = std::make_shared<Level>(Level());
+
+		std::shared_ptr<Level> level = std::make_shared<Level>(Level(renderer));
 		level->init();
 		while (true) {
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			SDL_RenderClear(renderer);
 			level->execute();
-			level->getPlayer()->draw(renderer);
+			level->cleanup();
 			SDL_RenderPresent(renderer);
 		}
 
@@ -45,10 +53,15 @@ int main(int argc, char* argv[]) {
         // The window is open: enter program loop (see SDL_PollEvent)
         //SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
+
         // Close and destroy the window
         SDL_DestroyWindow(window);
+		SDL_DestroyRenderer(renderer);
+
 
         // Clean up
         SDL_Quit();
+
+
         return 0;
 }

@@ -1,10 +1,10 @@
+#ifndef MOVABLE_H
+#define MOVABLE_H
+
 #include <cmath>
 #include <iostream>
 #include <memory>
 #include <string>
-
-#ifndef MOVABLE_H
-#define MOVABLE_H
 
 class Level;
 
@@ -20,6 +20,8 @@ private:
 	double accx;
 	double accy;
 
+	int rotation;
+
 	double de_accx;
 	double de_accy;
 
@@ -34,7 +36,7 @@ private:
 	double length(double a, double b);
 
 public:
-	Movable(int start_x, int start_y, std::shared_ptr<Level> l) {
+	Movable(double start_x, double start_y, std::shared_ptr<Level> l) {
 		level = l;
 		max_speed = 400;
 
@@ -51,6 +53,8 @@ public:
 
 		movingX = 0;
 		movingY = 0;
+
+		rotation = 0;
 	}
 
 	virtual void move();
@@ -59,6 +63,9 @@ public:
 
 	double getX() const;
 	double getY() const;
+
+	void setX(double value);
+	void setY(double value);
 
 	double getMaxSpeed() const;
 
@@ -71,11 +78,14 @@ public:
 	void setMovingX(int value);
 	void setMovingY(int value);
 
-	int getMovingX();
-	int getMovingY();
+	int getMovingX() const;
+	int getMovingY() const;
 
-	std::shared_ptr<Level> get_level();
-	const std::shared_ptr<Level> get_level() const;
+	int getRotation() const;
+	void setRotation(int value);
+
+	std::shared_ptr<Level> getLevel();
+	const std::shared_ptr<Level> getLevel() const;
 };
 
 #endif

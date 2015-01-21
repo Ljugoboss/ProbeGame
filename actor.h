@@ -1,13 +1,14 @@
-#include "movable.h"
-#include "sdl/SDL.h"
-
 #ifndef ACTOR_H
 #define ACTOR_H
+
+#include "movable.h"
+#include "sdl/SDL.h"
 
 class Actor : public Movable {
 private:
 public:
-	const char * image_path = "";
+	int actor_id;
+
 	/*
 	using Movable::move;
 	using Movable::accelerate;
@@ -15,11 +16,18 @@ public:
 	using Movable::getY;
 	*/
 
-	Actor(int x, int y, std::shared_ptr<Level> l) : Movable(x, y, l) { }
+	std::string image_path = "";
+
+	int image_width;
+	int image_height;
+
+	Actor(double x, double y, int id, std::shared_ptr<Level> l) : Movable(x, y, l) { 
+		actor_id = id;
+	}
 
 	virtual void act() = 0;
 
-	void draw(SDL_Renderer* renderer);
+	void draw();
 };
 
 #endif
