@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include "actor.h"
+#include "drawable.h"
 
 class Character : public Actor {
 private:

@@ -36,7 +36,10 @@ private:
 	double length(double a, double b);
 
 public:
-	Movable(double start_x, double start_y, std::shared_ptr<Level> l) {
+	Movable() {
+	}
+
+	void init(double start_x, double start_y, std::shared_ptr<Level> l) {
 		level = l;
 		max_speed = 400;
 

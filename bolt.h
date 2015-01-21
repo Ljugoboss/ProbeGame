@@ -3,8 +3,9 @@
 
 #include "actor.h"
 #include "level.h"
+#include "drawable.h"
 
-class Bolt : public Actor {
+class Bolt : public Actor, public Drawable<Bolt> {
 private:
 	int lifetime;
 	int round;
@@ -22,10 +23,12 @@ public:
 		}
 		image_height = 25;
 		image_width = 25;
-		image_path = "C:/Users/Twinmold/Documents/ProbeGame/bolt" + std::to_string(getRotation()) + ".bmp";
+		setup();
 	}
 
 	void act();
+
+	void setup();
 };
 
 #endif

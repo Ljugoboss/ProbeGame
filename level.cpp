@@ -12,6 +12,7 @@ void Level::execute() {
 void Level::addActor(std::shared_ptr<Actor> actor) {
 	current_id++;
 	actors[current_id] = actor;
+	std::cout << actors.size() << std::endl;
 }
 
 void Level::destroyActor(int id) {
