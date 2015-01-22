@@ -16,9 +16,11 @@ public:
 
 		setMovingX(xDirection);
 		setMovingY(yDirection);
-		if (xDirection == 1) {
+		if (xDirection != 0) {
+			state = 1;
 			setRotation(90);
 		} else {
+			state = 0;
 			setRotation(0);
 		}
 		image_height = 25;

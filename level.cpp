@@ -61,7 +61,11 @@ void Level::read() {
 				keys[SDLK_DOWN] = true;
 				break;
 			case SDLK_SPACE:
-				addActor(std::make_shared<Bolt>(Bolt(getPlayer()->getX(), getPlayer()->getY(), current_id + 1, shared_from_this(), 1, 0)));
+				if (getPlayer()->getRotation() == 0) {
+					addActor(std::make_shared<Bolt>(Bolt(getPlayer()->getX(), getPlayer()->getY(), current_id + 1, shared_from_this(), 1, 0)));
+				} else if(getPlayer()->getRotation() == 180) {
+					addActor(std::make_shared<Bolt>(Bolt(getPlayer()->getX(), getPlayer()->getY(), current_id + 1, shared_from_this(), -1, 0)));
+				}
 				break;
 			default:
 				break;

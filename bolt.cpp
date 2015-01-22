@@ -12,13 +12,10 @@ void Bolt::act() {
 	}
 }
 
-std::vector<std::vector<SDL_Texture*>> Drawable<Bolt>::animations = std::vector<std::vector<SDL_Texture*>>();
+std::vector<SDL_Texture*> Drawable<Bolt>::images = std::vector<SDL_Texture*>();
+std::vector<std::vector<frame>> Drawable<Bolt>::frames = std::vector<std::vector<frame>>();
 void Bolt::setup() {
-	if (animations.empty()) {
-		std::vector<SDL_Texture*> animation = std::vector<SDL_Texture*>();
-		std::cout << "bitmap created for bolt" << std::endl;
-		SDL_Texture * bitmap = createBitmap("C:/Users/Twinmold/Documents/ProbeGame/bolt" + std::to_string(getRotation()) + ".bmp");
-		animation.push_back(bitmap);
-		animations.push_back(animation);
+	if (images.empty()) {
+		parseXML("C:/Users/Twinmold/Documents/ProbeGame/bolt_animation.xml");
 	}
 }
