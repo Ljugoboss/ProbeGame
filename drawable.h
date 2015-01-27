@@ -4,7 +4,7 @@
 
 #include "rapidxml/rapidxml.hpp"
 #include <utility>      
-#include "movable.h"
+#include "locatable.h"
 #include "sdl/SDL.h"
 #include <sstream>  
 #include <fstream>
@@ -17,9 +17,8 @@ struct frame {
 };
 
 template <class T>
-class Drawable : public virtual Movable {
+class Drawable : public virtual Locatable {
 private:
-
 public:
 	int state;
 	int time;

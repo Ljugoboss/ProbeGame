@@ -1,10 +1,10 @@
 #include "level.h"
 
 void Level::execute() {
-	 read();
 	 for (auto const &it : actors) {
 		 it.second->act();
 	 }
+	 read();
 
 	 std::this_thread::sleep_for(std::chrono::milliseconds(1000 / FPS));
  }
@@ -24,6 +24,15 @@ void Level::cleanup() {
 		actors.erase(id);
 	}
 	destroyed.clear();
+}
+
+std::shared_ptr<Actor> Level::getActor(int id) {
+	return actors[id];
+}
+
+
+int Level::getCurrentId() const {
+	return current_id;
 }
 
 void Level::read() {
@@ -61,11 +70,7 @@ void Level::read() {
 				keys[SDLK_DOWN] = true;
 				break;
 			case SDLK_SPACE:
-				if (getPlayer()->getRotation() == 0) {
-					addActor(std::make_shared<Bolt>(Bolt(getPlayer()->getX(), getPlayer()->getY(), current_id + 1, shared_from_this(), 1, 0)));
-				} else if(getPlayer()->getRotation() == 180) {
-					addActor(std::make_shared<Bolt>(Bolt(getPlayer()->getX(), getPlayer()->getY(), current_id + 1, shared_from_this(), -1, 0)));
-				}
+				getPlayer()->useAbility();
 				break;
 			default:
 				break;
@@ -109,7 +114,7 @@ void Level::read() {
 	}
 }
 
-std::shared_ptr<Actor> Level::getPlayer() {
+std::shared_ptr<Player> Level::getPlayer() {
 	return main_character;
 }
 

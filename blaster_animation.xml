@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document>
+   <animation image="C:/Users/Twinmold/Documents/ProbeGame/BlasterRight.bmp">
+      <frame xlocation="0" ylocation="0" duration="100"/>
+   </animation>
+   <animation image="C:/Users/Twinmold/Documents/ProbeGame/BlasterLeft.bmp">
+      <frame xlocation="0" ylocation="0" duration="100"/>
+   </animation>
+   <animation image="C:/Users/Twinmold/Documents/ProbeGame/Blaster.bmp">
+      <frame xlocation="0" ylocation="0" duration="100"/>
+      <frame xlocation="0" ylocation="14" duration="100"/>
+      <frame xlocation="0" ylocation="28" duration="100"/>
+      <frame xlocation="0" ylocation="14" duration="100"/>
+   </animation>
+</document>

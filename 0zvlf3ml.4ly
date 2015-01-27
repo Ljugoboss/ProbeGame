@@ -3,34 +3,22 @@
 
 #include "character.h"
 #include "ability.h"
+class Blaster;
+#include "blaster.h"
 
 class Player : public Character, public Drawable<Player> {
 private:
 	std::vector<std::shared_ptr<Ability>> abilities;
-	int float_duration;
-	int time;
-	int height_index;
-	std::vector<int> height_modifiers;
 public:
 	Player(double x, double y, int id, std::shared_ptr<Level> l) : Character(x, y, id, l) {
-		height_modifiers = std::vector<int>({0, -1, -2, -3, -2, -1, 0, 1, 2, 3, 2, 1});
-		float_duration = 100;
-		height_index = 0;
-		time = 0;
-
 		image_height = 73;
 		image_width = 73;
-
 		setState(0);
 		setRotation(0);
 		setup();
 		abilities = std::vector<std::shared_ptr<Ability>>();
+		abilities.push_back(std::make_shared<Ability>(Blaster(this, l)));
 	}
-
-	double getY() const;
-
-	void addAbility();
-	void useAbility();
 
 	void act();
 

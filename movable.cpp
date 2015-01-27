@@ -49,20 +49,6 @@ void Movable::accelerate() {
 	}
 }
 
-double Movable::getX() const {
-	return x;
-}
-double Movable::getY() const {
-	return y;
-}
-
-void Movable::setX(double value) {
-	x = value;
-}
-void Movable::setY(double value) {
-	y = value;
-}
-
 double Movable::getMaxSpeed() const {
 	return max_speed / getLevel()->FPS;
 }
@@ -99,25 +85,9 @@ void Movable::setMovingY(int value) {
 	}
 }
 
-int Movable::getRotation() const {
-	return rotation;
-}
-
-void Movable::setRotation(int value) {
-	rotation = value;
-}
-
 int Movable::getMovingX() const {
 	return movingX;
 }
 int Movable::getMovingY() const {
 	return movingY;
-}
-
-const std::shared_ptr<Level> Movable::getLevel() const {
-	return level.lock();
-}
-
-std::shared_ptr<Level> Movable::getLevel() {
-	return level.lock();
 }

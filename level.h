@@ -18,7 +18,7 @@ private:
 	std::map<int, bool> keys;
 
 	std::map<int, std::shared_ptr<Actor>> actors;
-	std::shared_ptr<Actor> main_character;
+	std::shared_ptr<Player> main_character;
 
 	int current_id;
 
@@ -41,11 +41,13 @@ public:
 	}
 
 	void init() {
-		std::shared_ptr<Actor> player = std::make_shared<Player>(Player(50, 50, 0, shared_from_this()));
+		std::shared_ptr<Player> player = std::make_shared<Player>(Player(50, 50, 0, shared_from_this()));
+		player->addAbility();
 		actors[0] = player;
 		main_character = player;
 	}
 
+	std::shared_ptr<Actor> getActor(int id);
 	void addActor(std::shared_ptr<Actor> actor);
 
 	void destroyActor(int id);
@@ -56,7 +58,9 @@ public:
 
 	void read();
 
-	std::shared_ptr<Actor> getPlayer();
+	int getCurrentId() const;
+
+	std::shared_ptr<Player> getPlayer();
 
 	SDL_Renderer * getRenderer();
 };

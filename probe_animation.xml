@@ -2,19 +2,11 @@
 <document>
    <animation image="C:/Users/Twinmold/Documents/ProbeGame/ProbeRight.bmp">
       <frame xlocation="0" ylocation="3" duration="100"/>
-      <frame xlocation="0" ylocation="2" duration="100"/>
-      <frame xlocation="0" ylocation="1" duration="100"/>
-      <frame xlocation="0" ylocation="0" duration="100"/>
-      <frame xlocation="0" ylocation="1" duration="100"/>
-      <frame xlocation="0" ylocation="2" duration="100"/>
-      <frame xlocation="0" ylocation="3" duration="100"/>
-      <frame xlocation="0" ylocation="4" duration="100"/>
-      <frame xlocation="0" ylocation="5" duration="100"/>
-      <frame xlocation="0" ylocation="6" duration="100"/>
-      <frame xlocation="0" ylocation="5" duration="100"/>
-      <frame xlocation="0" ylocation="4" duration="100"/>
    </animation>
    <animation image="C:/Users/Twinmold/Documents/ProbeGame/ProbeLeft.bmp">
+      <frame xlocation="0" ylocation="3" duration="100"/>
+   </animation>
+   <animation image="C:/Users/Twinmold/Documents/ProbeGame/ProbeRight.bmp">
       <frame xlocation="0" ylocation="3" duration="100"/>
       <frame xlocation="0" ylocation="2" duration="100"/>
       <frame xlocation="0" ylocation="1" duration="100"/>
