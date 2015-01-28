@@ -4,21 +4,17 @@
 #include "ability.h"
 #include "sdl/SDL.h"
 #include "bolt.h"
+#include "drawable.h"
 
-class Blaster : public Ability, public Drawable<Blaster> {
+class Blaster : public Ability {
 private:
+	Drawable<Blaster> drawable;
 public:
-	Blaster(Actor * player, std::shared_ptr<Level> l) : Ability(player, l) {
-		image_width = 20;
-		image_height = 15;
-		setup();
-	}
+	Blaster(Actor * player, std::shared_ptr<Level> l);
 
 	void use();
 
 	void run();
-
-	void setup();
 
 	virtual double getX() const { return Ability::getX(); }
 	virtual double getY() const { return Ability::getY(); }

@@ -3,29 +3,19 @@
 
 #include "character.h"
 #include "ability.h"
+#include "drawable.h"
 
-class Player : public Character, public Drawable<Player> {
+class Player : public Character {
 private:
 	std::vector<std::shared_ptr<Ability>> abilities;
 	int float_duration;
 	int time;
 	int height_index;
 	std::vector<int> height_modifiers;
+
+	Drawable<Player> drawable;
 public:
-	Player(double x, double y, int id, std::shared_ptr<Level> l) : Character(x, y, id, l) {
-		height_modifiers = std::vector<int>({0, -1, -2, -3, -2, -1, 0, 1, 2, 3, 2, 1});
-		float_duration = 100;
-		height_index = 0;
-		time = 0;
-
-		image_height = 73;
-		image_width = 73;
-
-		setState(0);
-		setRotation(0);
-		setup();
-		abilities = std::vector<std::shared_ptr<Ability>>();
-	}
+	Player(double x, double y, int id, std::shared_ptr<Level> l);
 
 	double getY() const;
 	void setY(double value);
@@ -34,8 +24,6 @@ public:
 	void useAbility();
 
 	void act();
-
-	void setup();
 };
 
 #endif

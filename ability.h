@@ -2,7 +2,6 @@
 #define ABILITY_H
 
 #include "actor.h"
-#include "drawable.h"
 #include "movable.h"
 #include "sdl/SDL.h"
 

@@ -1,4 +1,8 @@
 #include "blaster.h"
+#include "level.h"
+
+Blaster::Blaster(Actor * player, std::shared_ptr<Level> l) : Ability(player, l), drawable(l->getRenderer(), l->FPS, "C:/Users/Twinmold/Documents/ProbeGame/blaster_animation.xml") {
+}
 
 void Blaster::use() {
 	int xmod = 13;
@@ -13,20 +17,12 @@ void Blaster::use() {
 
 void Blaster::run() {
 	if (getHolder()->getRotation() == 0) {
-		setState(0);
+		drawable.setState(0);
 		setRotation(0);
 	} else if (getHolder()->getRotation() == 180) {
-		setState(1);
+		drawable.setState(1);
 		setRotation(180);
 	}
 
-	draw();
-}
-
-std::vector<SDL_Texture*> Drawable<Blaster>::images = std::vector<SDL_Texture*>();
-std::vector<std::vector<frame>> Drawable<Blaster>::frames = std::vector<std::vector<frame>>();
-void Blaster::setup() {
-	if (images.empty()) {
-		parseXML("C:/Users/Twinmold/Documents/ProbeGame/blaster_animation.xml");
-	}
+	drawable.draw(getX(), getY());
 }

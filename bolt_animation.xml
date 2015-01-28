@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<document>
-   <animation image="C:/Users/Twinmold/Documents/ProbeGame/bolt0.bmp">
-      <frame xlocation="0" ylocation="0" duration="30"/>
-   </animation>
-   <animation image="C:/Users/Twinmold/Documents/ProbeGame/bolt90.bmp">
-      <frame xlocation="0" ylocation="0" duration="30"/>
-   </animation>
-</document>
+<drawable name="bolt" height="25" width="25">
+   	<animation image="C:/Users/Twinmold/Documents/ProbeGame/bolt0.bmp">
+      		<frame xlocation="0" ylocation="0" duration="30"/>
+   	</animation>
+   	<animation image="C:/Users/Twinmold/Documents/ProbeGame/bolt90.bmp">
+      		<frame xlocation="0" ylocation="0" duration="30"/>
+   	</animation>
+</drawable>

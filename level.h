@@ -45,6 +45,10 @@ public:
 		player->addAbility();
 		actors[0] = player;
 		main_character = player;
+		std::shared_ptr<Player> test = std::make_shared<Player>(Player(200, 200, 1, shared_from_this()));
+		actors[1] = test;
+		current_id++;
+
 	}
 
 	std::shared_ptr<Actor> getActor(int id);

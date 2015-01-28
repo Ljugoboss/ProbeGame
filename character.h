@@ -2,7 +2,6 @@
 #define CHARACTER_H
 
 #include "movable.h"
-#include "drawable.h"
 
 class Character : public Movable {
 private:

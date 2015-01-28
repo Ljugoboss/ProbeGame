@@ -23,6 +23,8 @@ public:
 
 		x = start_x;
 		y = start_y;
+
+		rotation = 0;
 	}
 
 	virtual double getX() const;

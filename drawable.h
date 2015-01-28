@@ -16,39 +16,72 @@ struct frame {
 };
 
 template <class T>
-class Drawable : public virtual Locatable {
+class Drawable {
 private:
-public:
-	int state;
-	int time;
-	int current_frame;
-	
+	static int image_height;
+	static int image_width;
 
+	static bool initialized;
 	static std::vector<SDL_Texture*> images;
 	static std::vector<std::vector<frame>> frames;
 
-	int image_width;
-	int image_height;
+	SDL_Renderer * renderer;
+	std::string image_path;
+	int FPS;
 
-	Drawable() { 
+	int state;
+	int time;
+	int current_frame;
+public:
+	Drawable(SDL_Renderer * source, int fps, std::string path) {
 		time = 0;
 		state = 0;
 		current_frame = 0;
+
+		renderer = source;
+		FPS = fps;
+		image_path = path;
+
+		if (!initialized) {
+			setup(image_path);
+			initialized = true;
+ 		}
 	}
 
-	virtual void setup() = 0;
+	void setup(std::string path);
 
-	void draw();
+	void draw(double x, double y);
+	void draw(int x, int y);
 
 	SDL_Texture * createBitmap(std::string path);
 
-	void parseXML(std::string file_name);
+	void parseXML(std::string path);
 
 	void setState(int value);
 };
 
 template <class T>
-void Drawable<T>::draw() {
+int Drawable<T>::image_height = 0;
+
+template <class T>
+int Drawable<T>::image_width = 0;
+
+template <class T>
+bool Drawable<T>::initialized = false;
+
+template <class T>
+std::vector<SDL_Texture*> Drawable<T>::images = std::vector<SDL_Texture*>();
+
+template <class T>
+std::vector<std::vector<frame>> Drawable<T>::frames = std::vector<std::vector<frame>>();
+
+template <class T>
+void Drawable<T>::draw(double x, double y) {
+	draw((int) x, (int) y);
+}
+
+template <class T>
+void Drawable<T>::draw(int x, int y) {
 	// Part of the bitmap that we want to draw
 	SDL_Rect source;
 	source.x = frames[state][current_frame].xlocation;
@@ -57,16 +90,16 @@ void Drawable<T>::draw() {
 	source.h = image_height;
 	// Part of the screen we want to draw the sprite to
 	SDL_Rect destination;
-	destination.x = (int)getX() - image_width / 2;
-	destination.y = (int)getY() - image_height / 2;
+	destination.x = x - image_width / 2;
+	destination.y = y - image_height / 2;
 	destination.w = image_width;
 	destination.h = image_height;
 
-	SDL_RenderCopy(getLevel()->getRenderer(), images[state], &source, &destination);
+	SDL_RenderCopy(renderer, images[state], &source, &destination);
 	//SDL_DestroyTexture(bitmap);
 
 	time++;
-	if (time >= frames[state][current_frame].duration / (1000 / getLevel()->FPS)) {
+	if (time >= frames[state][current_frame].duration / (1000 / FPS)) {
 		current_frame = (current_frame + 1) % frames[state].size();
 		time = 0;
 	}
@@ -76,15 +109,15 @@ template <class T>
 SDL_Texture * Drawable<T>::createBitmap(std::string path) {
 	SDL_Surface * surface = SDL_LoadBMP(path.c_str());
 	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255));
-	SDL_Texture* bitmap = SDL_CreateTextureFromSurface(getLevel()->getRenderer(), surface);
+	SDL_Texture* bitmap = SDL_CreateTextureFromSurface(renderer, surface);
 	return bitmap;
 }
 
 template <class T>
-void Drawable<T>::parseXML(std::string file_name) {
+void Drawable<T>::parseXML(std::string path) {
 	using namespace rapidxml;
 	xml_document<> doc;
-	std::ifstream file(file_name);
+	std::ifstream file(path);
 	std::stringstream buffer;
 	buffer << file.rdbuf();
 	file.close();
@@ -92,6 +125,8 @@ void Drawable<T>::parseXML(std::string file_name) {
 	doc.parse<0>(&content[0]);
 
 	xml_node<> *pRoot = doc.first_node();
+	image_height = atoi(pRoot->first_attribute("height")->value());
+	image_width = atoi(pRoot->first_attribute("width")->value());
 	for (xml_node<> *pNode = pRoot->first_node("animation"); pNode; pNode = pNode->next_sibling()) {
 		images.push_back(createBitmap(pNode->first_attribute("image")->value()));
 		frames.push_back(std::vector<frame>());
@@ -110,6 +145,11 @@ void Drawable<T>::setState(int value) {
 	state = value;
 	current_frame = 0;
 	time = 0;
+}
+
+template <class T>
+void Drawable<T>::setup(std::string path) {
+	parseXML(path);
 }
 
 

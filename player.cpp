@@ -2,12 +2,21 @@
 #include "level.h"
 #include "blaster.h"
 
+Player::Player(double x, double y, int id, std::shared_ptr<Level> l) : Character(x, y, id, l), drawable(l->getRenderer(), l->FPS, "C:/Users/Twinmold/Documents/ProbeGame/probe_animation.xml") {
+	height_modifiers = std::vector<int>({ 0, -1, -2, -3, -2, -1, 0, 1, 2, 3, 2, 1 });
+	float_duration = 100;
+	height_index = 0;
+	time = 0;
+
+	abilities = std::vector<std::shared_ptr<Ability>>();
+}
+
 void Player::act() {
 	if (getMovingX() == 1) {
-		setState(0);
+		drawable.setState(0);
 		setRotation(0);
 	} else if (getMovingX() == -1) {
-		setState(1);
+		drawable.setState(1);
 		setRotation(180);
 	}
 
@@ -23,7 +32,7 @@ void Player::act() {
 	for (std::shared_ptr<Ability> ability : abilities)  {
 		ability->run();
 	}
-	draw();
+	drawable.draw(getX(), getY());
 }
 
 void Player::addAbility() {
@@ -39,12 +48,4 @@ double Player::getY() const {
 
 void Player::setY(double value) {
 	Movable::setY(value - height_modifiers[height_index]);
-}
-
-std::vector<SDL_Texture*> Drawable<Player>::images = std::vector<SDL_Texture*>();
-std::vector<std::vector<frame>> Drawable<Player>::frames = std::vector<std::vector<frame>>();
-void Player::setup() {
-	if (images.empty()) {
-		parseXML("C:/Users/Twinmold/Documents/ProbeGame/probe_animation.xml");
-	}
 }
