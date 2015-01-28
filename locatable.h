@@ -8,11 +8,12 @@ class Level;
 class Locatable {
 private:
 	std::weak_ptr<Level> level;
-public:
+
 	double x;
 	double y;
 
 	int rotation;
+public:
 
 	Locatable() {
 	}
@@ -27,11 +28,11 @@ public:
 	virtual double getX() const;
 	virtual double getY() const;
 
-	void setX(double value);
-	void setY(double value);
+	virtual void setX(double value);
+	virtual void setY(double value);
 
-	int getRotation() const;
-	void setRotation(int value);
+	virtual int getRotation() const;
+	virtual void setRotation(int value);
 
 	std::shared_ptr<Level> getLevel();
 	const std::shared_ptr<Level> getLevel() const;

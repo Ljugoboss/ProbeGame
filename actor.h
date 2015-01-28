@@ -1,10 +1,10 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include "movable.h"
+#include "locatable.h"
 #include "sdl/SDL.h"
 
-class Actor : public virtual Movable {
+class Actor : public virtual Locatable {
 private:
 public:
 	int actor_id;

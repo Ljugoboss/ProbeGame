@@ -37,6 +37,10 @@ double Player::getY() const {
 	return Movable::getY() + height_modifiers[height_index];
 }
 
+void Player::setY(double value) {
+	Movable::setY(value - height_modifiers[height_index]);
+}
+
 std::vector<SDL_Texture*> Drawable<Player>::images = std::vector<SDL_Texture*>();
 std::vector<std::vector<frame>> Drawable<Player>::frames = std::vector<std::vector<frame>>();
 void Player::setup() {

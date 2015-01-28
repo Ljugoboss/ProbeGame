@@ -5,12 +5,12 @@
 #include "level.h"
 #include "drawable.h"
 
-class Bolt : public Actor, public Drawable<Bolt> {
+class Bolt : public Movable, public Drawable<Bolt> {
 private:
 	int lifetime;
 	int round;
 public:
-	Bolt(double x, double y, int id, std::shared_ptr<Level> l, int xDirection, int yDirection) : Actor(x, y, id, l) {
+	Bolt(double x, double y, int id, std::shared_ptr<Level> l, int xDirection, int yDirection) : Movable(x, y, id, l) {
 		lifetime = 8;
 		round = 0;
 

@@ -1,13 +1,13 @@
 #ifndef MOVABLE_H
 #define MOVABLE_H
 
-#include "locatable.h"
+#include "actor.h"
 #include <cmath>
 #include <iostream>
 #include <memory>
 #include <string>
 
-class Movable : public virtual Locatable {
+class Movable : public Actor {
 private:
 	double velx;
 	double vely;
@@ -28,7 +28,7 @@ private:
 	double length(double a, double b);
 
 public:
-	Movable() {
+	Movable(double x, double y, int id, std::shared_ptr<Level> l) : Actor(x, y, id, l) {
 		max_speed = 400;
 
 		de_accx = 25;

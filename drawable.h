@@ -1,7 +1,6 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
-
 #include "rapidxml/rapidxml.hpp"
 #include <utility>      
 #include "locatable.h"

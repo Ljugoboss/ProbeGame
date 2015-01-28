@@ -28,6 +28,7 @@ public:
 	}
 
 	double getY() const;
+	void setY(double value);
 
 	void addAbility();
 	void useAbility();

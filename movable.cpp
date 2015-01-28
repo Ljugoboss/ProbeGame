@@ -16,8 +16,8 @@ void Movable::move () {
 	int checkY = sign(vely);
 	double distance = length(velx, vely);
 	if (!(distance == 0)) {
-		x += (int) (velx * (velx / distance) * checkX);
-		y += (int) (vely * (vely / distance) * checkY);
+		setX(getX() + (velx * (velx / distance) * checkX));
+		setY(getY() + (vely * (vely / distance) * checkY));
 	}
 }
 
