@@ -1,20 +1,10 @@
 #include "movable.h"
 #include "level.h"
 
-int Movable::sign(double i) {
-	if (i > 0) { return 1; }
-	if (i < 0) { return -1; }
-	return 0;
-}
-
-double Movable::length(double a, double b) {
-	return sqrt(pow(a, 2) + pow(b, 2));
-}
-
 void Movable::move () {
 	int checkX = sign(velx);
 	int checkY = sign(vely);
-	double distance = length(velx, vely);
+	float distance = length(velx, vely);
 	if (!(distance == 0)) {
 		setX(getX() + (velx * (velx / distance) * checkX));
 		setY(getY() + (vely * (vely / distance) * checkY));
@@ -49,21 +39,21 @@ void Movable::accelerate() {
 	}
 }
 
-double Movable::getMaxSpeed() const {
+float Movable::getMaxSpeed() const {
 	return max_speed / getLevel()->FPS;
 }
 
-double Movable::getAccX() const {
+float Movable::getAccX() const {
 	return accx / getLevel()->FPS;
 }
-double Movable::getAccY() const {
+float Movable::getAccY() const {
 	return accy / getLevel()->FPS;
 }
 
-double Movable::getDeaccX() const {
+float Movable::getDeaccX() const {
 	return de_accx / getLevel()->FPS;
 }
-double Movable::getDeaccY() const {
+float Movable::getDeaccY() const {
 	return de_accy / getLevel()->FPS;
 }
 

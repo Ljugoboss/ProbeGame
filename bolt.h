@@ -12,7 +12,7 @@ private:
 
 	Drawable<Bolt> drawable;
 public:
-	Bolt(double x, double y, int id, std::shared_ptr<Level> l, int xDirection, int yDirection);
+	Bolt(float x, float y, std::shared_ptr<Level> l, int xDirection, int yDirection);
 
 	void act();
 };

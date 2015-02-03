@@ -15,10 +15,10 @@ private:
 
 	Drawable<Player> drawable;
 public:
-	Player(double x, double y, int id, std::shared_ptr<Level> l);
+	Player(float x, float y, std::shared_ptr<Level> l);
 
-	double getY() const;
-	void setY(double value);
+	float getY() const;
+	void setY(float value);
 
 	void addAbility();
 	void useAbility();

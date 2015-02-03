@@ -15,9 +15,6 @@ public:
 	void use();
 
 	void run();
-
-	virtual double getX() const { return Ability::getX(); }
-	virtual double getY() const { return Ability::getY(); }
 };
 
 #endif

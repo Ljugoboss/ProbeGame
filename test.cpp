@@ -13,7 +13,7 @@
 int main(int argc, char* argv[]) {
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-        SDL_Window *window;                    // Declare a pointer
+        SDL_Window *window;                    // Declare a Vec2fer
 
         SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 

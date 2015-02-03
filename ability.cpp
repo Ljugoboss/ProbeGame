@@ -1,6 +1,6 @@
 #include "ability.h"
 
-double Ability::getX() const {
+float Ability::getX() const {
 	int modifier = modifierR;
 	if (getHolder()->getRotation() == 180) {
 		modifier = modifierL;
@@ -8,7 +8,7 @@ double Ability::getX() const {
 	return (getHolder()->getX() + modifier);
 }
 
-double Ability::getY() const {
+float Ability::getY() const {
 	return (getHolder()->getY() + modifierY);
 }
 

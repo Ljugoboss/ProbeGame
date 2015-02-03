@@ -8,10 +8,10 @@ void Blaster::use() {
 	int xmod = 13;
 	int ymod = 3;
 	if (getHolder()->getRotation() == 0) {
-		getLevel()->addActor(std::make_shared<Bolt>(Bolt(getX() + xmod, getY() + ymod, getLevel()->getCurrentId() + 1, getLevel(), 1, 0)));
+		getLevel()->addActor(std::make_shared<Bolt>(Bolt(getX() + xmod, getY() + ymod, getLevel(), 1, 0)));
 	}
 	else if (getHolder()->getRotation() == 180) {
-		getLevel()->addActor(std::make_shared<Bolt>(Bolt(getX() - xmod, getY() + ymod, getLevel()->getCurrentId() + 1, getLevel(), -1, 0)));
+		getLevel()->addActor(std::make_shared<Bolt>(Bolt(getX() - xmod, getY() + ymod, getLevel(), -1, 0)));
 	}
 }
 

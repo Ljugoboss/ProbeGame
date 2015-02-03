@@ -25,8 +25,8 @@ public:
 
 	virtual void run() = 0;
 
-	virtual double getX() const;
-	virtual double getY() const;
+	virtual float getX() const;
+	virtual float getY() const;
 
 	Actor * getHolder();
 	const Actor * getHolder() const;

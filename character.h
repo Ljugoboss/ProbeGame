@@ -6,7 +6,7 @@
 class Character : public Movable {
 private:
 public:
-	Character(double x, double y, int id, std::shared_ptr<Level> l) : Movable(x, y, id, l) {
+	Character(float x, float y, std::shared_ptr<Level> l) : Movable(x, y, l) {
 	}
 };
 

@@ -9,15 +9,15 @@
 #include <fstream>
 #include <vector>
 
-struct frame {
-	int xlocation;
-	int ylocation;
-	int duration;
-};
-
 template <class T>
 class Drawable {
 private:
+	struct frame {
+		int xlocation;
+		int ylocation;
+		int duration;
+	};
+
 	static int image_height;
 	static int image_width;
 
@@ -50,7 +50,7 @@ public:
 
 	void setup(std::string path);
 
-	void draw(double x, double y);
+	void draw(float x, float y);
 	void draw(int x, int y);
 
 	SDL_Texture * createBitmap(std::string path);
@@ -73,10 +73,10 @@ template <class T>
 std::vector<SDL_Texture*> Drawable<T>::images = std::vector<SDL_Texture*>();
 
 template <class T>
-std::vector<std::vector<frame>> Drawable<T>::frames = std::vector<std::vector<frame>>();
+std::vector<std::vector<typename Drawable<T>::frame>> Drawable<T>::frames = std::vector<std::vector<typename Drawable<T>::frame>>();
 
 template <class T>
-void Drawable<T>::draw(double x, double y) {
+void Drawable<T>::draw(float x, float y) {
 	draw((int) x, (int) y);
 }
 

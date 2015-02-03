@@ -8,27 +8,24 @@
 #include <string>
 
 class Movable : public Actor {
-private:
-	double velx;
-	double vely;
-	double accx;
-	double accy;
+//private:
+public:
+	float velx;
+	float vely;
+	float accx;
+	float accy;
 
-	double de_accx;
-	double de_accy;
+	float de_accx;
+	float de_accy;
 
-	double max_speed;
+	float max_speed;
 
-	double weight;
+	float weight;
 
 	int movingX;
 	int movingY;
-
-	int sign(double i);
-	double length(double a, double b);
-
-public:
-	Movable(double x, double y, int id, std::shared_ptr<Level> l) : Actor(x, y, id, l) {
+//public:
+	Movable(float x, float y, std::shared_ptr<Level> l) : Actor(x, y, l) {
 		max_speed = 400;
 
 		de_accx = 25;
@@ -47,13 +44,13 @@ public:
 
 	virtual void accelerate();
 
-	double getMaxSpeed() const;
+	float getMaxSpeed() const;
 
-	double getAccX() const;
-	double getAccY() const;
+	float getAccX() const;
+	float getAccY() const;
 
-	double getDeaccX() const;
-	double getDeaccY() const;
+	float getDeaccX() const;
+	float getDeaccY() const;
 
 	void setMovingX(int value);
 	void setMovingY(int value);
